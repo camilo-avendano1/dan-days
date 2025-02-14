@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank you</title>
+    <link rel="stylesheet" href="css/lastpage.css" />
+    <style>
+      /* Centrar todo el contenido */
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        background-color: #fdf6e3; /* Color de fondo suave */
+        margin: 0;
+      }
+
+      /* Ajuste del tamaño del GIF */
+      #rizz {
+        width: 300px; /* Ajusta el ancho según necesites */
+        height: auto; /* Mantiene la proporción */
+        max-width: 100%; /* Para que sea responsive */
+        display: none; /* Oculta el GIF hasta que inicie la música */
+        margin-top: 20px;
+      }
+
+      /* Estilo del botón */
+      .button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: pink;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .button:hover {
+        background-color: #ffcccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="thankyou">
+      <h1><b>Soy el ser más feliz del mundo</b></h1>
+    </div>
+
+    <!-- Contenedor centrado -->
+    <div id="gif-container">
+      <img id="rizz" src="rizz.gif" alt="rizzler god" />
+    </div>
+
+    <h2>
+      No te vayas, aún hay más, primero da click en "Feliz" y luego en Clickeame
+    </h2>
+
+    <!-- Audio en segundo plano sin controles -->
+    <audio id="background-audio" loop>
+      <source src="congratulations.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <button class="button" onclick="location.href='date.html'">
+      Clickeame
+    </button>
+
+    <script>
+      function enableMedia() {
+        var audio = document.getElementById("background-audio");
+        var gif = document.getElementById("rizz");
+
+        // Iniciar el audio
+        audio.volume = 0.5; // Ajusta el volumen si es necesario
+        audio
+          .play()
+          .then(() => {
+            console.log("Audio reproduciéndose");
+
+            // Hacer visible el GIF y reiniciarlo
+            gif.style.display = "block"; // Muestra el GIF cuando la música inicia
+            gif.src = "rizz.gif?" + new Date().getTime(); // Reinicia el GIF
+          })
+          .catch((error) => {
+            console.log("Error al reproducir el audio: ", error);
+          });
+
+        // Removemos los event listeners después de la primera interacción
+        document.removeEventListener("click", enableMedia);
+        document.removeEventListener("keydown", enableMedia);
+        document.removeEventListener("touchstart", enableMedia);
+      }
+
+      // Agregamos event listeners para permitir la reproducción
+      document.addEventListener("click", enableMedia);
+      document.addEventListener("keydown", enableMedia);
+      document.addEventListener("touchstart", enableMedia);
+    </script>
+  </body>
+</html>
+

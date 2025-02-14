@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dessert Surprise</title>
+    <link rel="stylesheet" href="css/dessert.css" />
+    <style>
+      /* Estilos para el mensaje de sorpresa */
+      #surprise-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        font-size: 2rem;
+        font-weight: bold;
+        opacity: 1;
+        transition: opacity 1s ease-out;
+        text-align: center;
+      }
+
+      /* Estilo para ocultar la sorpresa y mostrar la imagen final */
+      #result-container {
+        display: none;
+        text-align: center;
+      }
+
+      #result-container img {
+        max-width: 80%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Botón centrado debajo de la imagen */
+      .button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        background-color: #ffb6c1;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        background-color: #ff809f;
+      }
+
+      /* Estilos para la reseña */
+      .review {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        font-style: italic;
+        color: #333;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Contenedor de la sorpresa inicial -->
+    <div id="surprise-container">
+      <p>¡Prepárate para ver mi parte más íntima y lo que más deseo contigo!</p>
+      <p>🥁🥁🥁</p>
+      <p>(¡Haz clic en cualquier parte para empezar!)</p>
+      <audio id="drumroll" src="redobles.mp3"></audio>
+    </div>
+
+    <!-- Contenedor del resultado final -->
+    <div id="result-container">
+      <h2>¡Cuestión de Tiempooo!</h2>
+      <img src="food/about_time.jpg" alt="About Time" />
+
+      <!-- Reseña agregada debajo de la imagen -->
+      <p class="review">
+        "Es una de esas películas que capturan el romanticismo en su forma más
+        pura y sincera. No se trata solo del amor entre Tim y Mary, sino de la
+        manera en que la historia celebra los pequeños momentos que construyen
+        una relación: las primeras citas torpes, las conversaciones nocturnas,
+        los gestos cotidianos que crean intimidad."
+      </p>
+
+      <button class="button" onclick="location.href='lastpage.html'">
+        Te amo mi amor
+      </button>
+    </div>
+
+    <script>
+      let hasStarted = false; // Variable para asegurar que solo se inicie una vez
+
+      document.body.addEventListener("click", function startSurprise() {
+        if (!hasStarted) {
+          hasStarted = true; // Evita múltiples inicios
+
+          let drumroll = document.getElementById("drumroll");
+          let surpriseContainer = document.getElementById("surprise-container");
+          let resultContainer = document.getElementById("result-container");
+
+          // Reproducir sonido después del clic
+          drumroll.play().catch((error) => {
+            console.log("El audio necesita interacción del usuario:", error);
+          });
+
+          // Iniciar la animación después de 7 segundos
+          setTimeout(function () {
+            surpriseContainer.style.opacity = "0"; // Animación de desvanecimiento
+            setTimeout(() => {
+              surpriseContainer.style.display = "none"; // Ocultar después de animarse
+              resultContainer.style.display = "block"; // Mostrar la imagen final
+            }, 1000);
+          }, 6000);
+
+          // Eliminar el evento de clic después del primer clic
+          document.body.removeEventListener("click", startSurprise);
+        }
+      });
+    </script>
+  </body>
+</html>
+
